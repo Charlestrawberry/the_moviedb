@@ -119,7 +119,7 @@ export default function MovieApp() {
         <input
           type="text"
           placeholder="Search for a movie..."
-          className="p-3 w-full sm:max-w-md rounded-lg text-black"
+          className="p-3 w-full sm:max-w-md rounded-lg text-white dark:text-white dark:bg-gray-800"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
@@ -136,7 +136,7 @@ export default function MovieApp() {
         <select
           value={genreFilter}
           onChange={(e) => setGenreFilter(e.target.value)}
-          className="p-2 rounded text-black"
+          className="p-2 rounded text-white dark:text-white dark:bg-gray-800"
         >
           <option value="">All Genres</option>
           <option value="Action">Action</option>

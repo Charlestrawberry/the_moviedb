@@ -8,7 +8,7 @@ export default function Pagination({ currentPage, totalResults, onPageChange }) 
       {currentPage > 1 && (
         <button
           onClick={() => onPageChange(currentPage - 1)}
-          className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded"
+          className="px-4 py-2 bg-cyan-500 hover:bg-cyan-700 text-white rounded"
         >
           Prev
         </button>
@@ -16,7 +16,7 @@ export default function Pagination({ currentPage, totalResults, onPageChange }) 
       {currentPage < totalPages && (
         <button
           onClick={() => onPageChange(currentPage + 1)}
-          className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded"
+          className="px-4 py-2 bg-cyan-500 hover:bg-cyan-700 text-white rounded"
         >
           Next
         </button>
