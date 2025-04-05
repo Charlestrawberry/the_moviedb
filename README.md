@@ -1,9 +1,8 @@
-# THE MOVIE DATABASE 
+# THE MOVIE DATABASE
 
 # MovieDatabase App
 
 ![alt text](image.png)
-
 
 MovieDatabase is a web application built with **React** and **Vite** that allows users to browse, search, and discover information about movies. It fetches data from a movie API (e.g., TMDB) and displays details such as movie titles, release dates, ratings, and more.
 
@@ -29,5 +28,6 @@ Follow these steps to set up the project locally:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/moviedatabase-app.git
-   cd moviedatabase-app
+   git clone https://github.com/charlestrawberry/the_moviedb-app.git
+   cd the_movie_db-app
+   ```
