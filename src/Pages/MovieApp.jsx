@@ -6,7 +6,7 @@ import Favorites from "../components/Favorites";
 import Pagination from "../components/Pagination";
 import ThemeToggle from "../components/ThemeToggle";
 
-const API_KEY = "9f675f6"; // only key, without full URL
+const API_KEY = "9f675f6"; // only key, 
 
 export default function MovieApp() {
   const [query, setQuery] = useState("");
@@ -50,7 +50,7 @@ export default function MovieApp() {
               return detailsRes.data;
             } catch (err) {
               console.error(`Error fetching details for ${movie.imdbID}`, err);
-              return movie; // fallback to basic if error
+              return movie; 
             }
           })
         );
@@ -110,7 +110,7 @@ export default function MovieApp() {
     >
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-4xl font-bold text-center w-full">
-          🎬 Movieflix Movie Finder
+          Movieflix Movie Finder
         </h1>
         <ThemeToggle theme={theme} setTheme={setTheme} />
       </div>
@@ -119,7 +119,7 @@ export default function MovieApp() {
         <input
           type="text"
           placeholder="Search for a movie..."
-          className="p-3 w-full sm:max-w-md rounded-lg text-white dark:text-white dark:bg-gray-800"
+          className="p-3 w-full sm:max-w-md rounded-lg text-xl text-amber-600 dark:text-white dark:bg-gray-800"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
@@ -136,7 +136,7 @@ export default function MovieApp() {
         <select
           value={genreFilter}
           onChange={(e) => setGenreFilter(e.target.value)}
-          className="p-2 rounded text-white dark:text-white dark:bg-gray-800"
+          className="p-2 rounded text-amber-600 dark:text-white dark:bg-gray-800"
         >
           <option value="">All Genres</option>
           <option value="Action">Action</option>
@@ -149,7 +149,7 @@ export default function MovieApp() {
         </select>
       </div>
 
-      {loading && <div className="text-center text-lg">Loading in 5G...</div>}
+      {loading && <div className="text-center text-lg">Loading ...</div>}
       {error && <div className="text-center text-red-500 mb-4">{error}</div>}
 
       {!selectedMovie && !loading && filteredMovies.length > 0 && (
