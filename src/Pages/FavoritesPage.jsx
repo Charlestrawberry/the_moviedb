@@ -1,21 +1,49 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { FavoritesContext } from "../context/FavoritesContext";
+import axios from "axios";
+
+const API_KEY = "9f675f6";
 
 export default function FavoritesPage() {
   const { favorites } = useContext(FavoritesContext);
+  const [detailedFavorites, setDetailedFavorites] = useState([]);
+
+  useEffect(() => {
+    const fetchFavoriteDetails = async () => {
+      const results = await Promise.all(
+        favorites.map(async (fav) => {
+          // If full data exists, return it; otherwise fetch using imdbID
+          if (fav.Title && fav.Poster && fav.Year) return fav;
+
+          try {
+            const res = await axios.get(
+              `https://www.omdbapi.com/?apikey=${API_KEY}&i=${fav.imdbID}`
+            );
+            return res.data;
+          } catch (err) {
+            console.error("Failed to fetch favorite movie:", fav.imdbID, err);
+            return fav; // fallback
+          }
+        })
+      );
+      setDetailedFavorites(results);
+    };
+
+    fetchFavoriteDetails();
+  }, [favorites]);
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-black dark:text-white px-4 py-8">
       <Navbar />
       <h2 className="text-3xl font-semibold text-center mb-6">Your Favorite Movies ❤️</h2>
 
-      {favorites.length === 0 ? (
+      {detailedFavorites.length === 0 ? (
         <p className="text-center text-lg text-gray-500">You have no favorites yet.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {favorites.map((movie) => (
+          {detailedFavorites.map((movie) => (
             <Link
               key={movie.imdbID}
               to={`/movie/${movie.imdbID}`}

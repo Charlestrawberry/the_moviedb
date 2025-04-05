@@ -6,7 +6,7 @@ import Favorites from "../components/Favorites";
 import Pagination from "../components/Pagination";
 import ThemeToggle from "../components/ThemeToggle";
 
-const API_KEY = "9f675f6"; // only key, 
+const API_KEY = "9f675f6"; // only key,
 
 export default function MovieApp() {
   const [query, setQuery] = useState("");
@@ -50,7 +50,7 @@ export default function MovieApp() {
               return detailsRes.data;
             } catch (err) {
               console.error(`Error fetching details for ${movie.imdbID}`, err);
-              return movie; 
+              return movie;
             }
           })
         );
@@ -122,6 +122,11 @@ export default function MovieApp() {
           className="p-3 w-full sm:max-w-md rounded-lg text-xl text-amber-600 dark:text-white dark:bg-gray-800"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              searchMovies(1);
+            }
+          }}
         />
         <button
           onClick={() => searchMovies(1)}

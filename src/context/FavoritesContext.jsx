@@ -1,9 +1,11 @@
+// FavoritesContext.js
 import React, { createContext, useState, useEffect } from "react";
 
 export const FavoritesContext = createContext();
 
-export function FavoritesProvider({ children }) {
+export const FavoritesProvider = ({ children }) => {
   const [favorites, setFavorites] = useState(() => {
+    // Load from localStorage if available
     const stored = localStorage.getItem("favorites");
     return stored ? JSON.parse(stored) : [];
   });
@@ -17,13 +19,18 @@ export function FavoritesProvider({ children }) {
     if (exists) {
       setFavorites(favorites.filter((fav) => fav.imdbID !== movie.imdbID));
     } else {
-      setFavorites([...favorites, movie]);
+      // Store only imdbID to reduce localStorage size, or store full if preferred
+      setFavorites([...favorites, { imdbID: movie.imdbID }]);
     }
   };
 
+  const isFavorite = (imdbID) => {
+    return favorites.some((fav) => fav.imdbID === imdbID);
+  };
+
   return (
-    <FavoritesContext.Provider value={{ favorites, toggleFavorite }}>
+    <FavoritesContext.Provider value={{ favorites, toggleFavorite, isFavorite }}>
       {children}
     </FavoritesContext.Provider>
   );
-}
+};
