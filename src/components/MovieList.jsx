@@ -1,21 +1,19 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
 
-export default function MovieList({ movies, toggleFavorite, favorites }) {
+export default function MovieList({ movies, getMovieDetails, toggleFavorite, favorites }) {
   return (
     <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
       {movies.map(movie => (
         <div key={movie.imdbID} className="bg-gray-800 p-3 rounded-xl shadow hover:scale-105 transition">
-          <Link to={`/movie/${movie.imdbID}`}>
-            <img
-              src={movie.Poster !== 'N/A' ? movie.Poster : 'https://via.placeholder.com/300x450'}
-              alt={movie.Title}
-              className="w-full h-64 object-cover rounded-md mb-2"
-            />
-            <h3 className="text-lg font-semibold text-white">
-              {movie.Title} ({movie.Year})
-            </h3>
-          </Link>
+          <img
+            src={movie.Poster !== 'N/A' ? movie.Poster : 'https://via.placeholder.com/300x450'}
+            alt={movie.Title}
+            className="w-full h-64 object-cover rounded-md mb-2"
+            onClick={() => getMovieDetails(movie.imdbID)}
+          />
+          <h3 className="text-lg font-semibold cursor-pointer" onClick={() => getMovieDetails(movie.imdbID)}>
+            {movie.Title} ({movie.Year})
+          </h3>
           <button
             className="mt-2 text-sm text-yellow-400 hover:text-yellow-300"
             onClick={() => toggleFavorite(movie)}
@@ -25,5 +23,5 @@ export default function MovieList({ movies, toggleFavorite, favorites }) {
         </div>
       ))}
     </div>
-  );
+  )
 }
