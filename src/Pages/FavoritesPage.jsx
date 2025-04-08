@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import { FavoritesContext } from "../context/FavoritesContext";
 import axios from "axios";
 
@@ -36,8 +35,8 @@ export default function FavoritesPage() {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-black dark:text-white px-4 py-8">
-      <Navbar />
-      <h2 className="text-3xl font-semibold text-center mb-6">Your Favorite Movies ❤️</h2>
+      
+      <h2 className="text-3xl font-semibold text-center mb-6">Your Favorite Movies </h2>
 
       {detailedFavorites.length === 0 ? (
         <p className="text-center text-lg text-gray-500">You have no favorites yet.</p>

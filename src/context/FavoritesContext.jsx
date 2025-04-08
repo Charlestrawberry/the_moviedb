@@ -15,13 +15,12 @@ export const FavoritesProvider = ({ children }) => {
   }, [favorites]);
 
   const toggleFavorite = (movie) => {
-    const exists = favorites.find((fav) => fav.imdbID === movie.imdbID);
-    if (exists) {
-      setFavorites(favorites.filter((fav) => fav.imdbID !== movie.imdbID));
-    } else {
-      // Store only imdbID to reduce localStorage size, or store full if preferred
-      setFavorites([...favorites, { imdbID: movie.imdbID }]);
-    }
+    setFavorites((prev) => {
+      const exists = prev.find((m) => m.imdbID === movie.imdbID);
+      return exists
+        ? prev.filter((m) => m.imdbID !== movie.imdbID)
+        : [...prev, movie];
+    });
   };
 
   const isFavorite = (imdbID) => {
@@ -29,7 +28,9 @@ export const FavoritesProvider = ({ children }) => {
   };
 
   return (
-    <FavoritesContext.Provider value={{ favorites, toggleFavorite, isFavorite }}>
+    <FavoritesContext.Provider
+      value={{ favorites, toggleFavorite, isFavorite }}
+    >
       {children}
     </FavoritesContext.Provider>
   );
